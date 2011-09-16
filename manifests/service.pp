@@ -15,7 +15,7 @@
 # This class file is not called directly
 class nginx::service {
   exec { 'rebuild-nginx-vhosts':
-    command     => "if [ -n "`ls ${nginx::params::nx_temp_dir}/nginx.d`" ] ; then /bin/cat ${nginx::params::nx_temp_dir}/nginx.d/* > ${nginx::params::nx_conf_dir}/conf.d/vhost_autogen.conf ; fi",
+    command     => "/bin/bash -c 'if [ -n \"`ls ${nginx::params::nx_temp_dir}/nginx.d`\" ] ; then /bin/cat ${nginx::params::nx_temp_dir}/nginx.d/* > ${nginx::params::nx_conf_dir}/conf.d/vhost_autogen.conf ; fi'",
     refreshonly => true,
     subscribe   => File["${nginx::params::nx_temp_dir}/nginx.d"],
   }
